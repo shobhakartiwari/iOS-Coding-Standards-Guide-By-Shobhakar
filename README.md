@@ -14,3 +14,20 @@ extension Task {
     }
 }
 ```
+### 2. Write documention for each Parameter, Throws, and Returns.
+```swift
+/*Repeats a string `times` times.
+
+- Parameter str:   The string to repeat.
+- Parameter times: The number of times to repeat `str`.
+
+- Throws: `MyError.InvalidTimes` if the `times` parameter 
+    is less than zero.
+
+- Returns: A new string with `str` repeated `times` times.
+*/
+func repeatString(str: String, times: Int) throws -> String {
+    guard times >= 0 else { throw MyError.InvalidTimes }
+    return Repeat(count: 5, repeatedValue: "Hello").joinWithSeparator("")
+}
+```
