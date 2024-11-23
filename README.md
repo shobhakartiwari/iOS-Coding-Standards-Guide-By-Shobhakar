@@ -321,3 +321,11 @@ extension SomeOtherClass: UIViewController {
     ...
     }
     ```
+## 10. Loops
+- Use the `enumerated()` function if you need to loop over a Sequence and use the index:
+    
+    ```swift
+    for (index, element) in someArray.enumerated() {
+        ...
+    }
+    ```
