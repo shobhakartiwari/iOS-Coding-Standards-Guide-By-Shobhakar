@@ -307,3 +307,17 @@ extension SomeOtherClass: UIViewController {
     typealias APICompletion = (jsonResult: [JSONObject]?, error: NSError?) -> Void
     typealias BasicBlock = () -> Void
     ```
+
+## 9. Switch Statements
+- Use multiple values on a single `case` where it is appropriate:
+    
+    ```swift
+    var someCharacter: Character
+    ...
+        
+    switch someCharacter {
+    case "a", "e", "i", "o", "u":
+        print("\(someCharacter) is a vowel")
+    ...
+    }
+    ```
