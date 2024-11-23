@@ -198,3 +198,62 @@ extension SomeOtherClass: UIViewController {
         }
     }
     ```
+
+    ## 6. Protocols
+- **Protocol Conformance**
+    - When adding protocol conformance to a type, use a separate extension for the protocol methods. This keeps the related methods grouped together with the protocol and can simplify instructions to add a protocol to a type with its associated methods.
+    - Use a `// MARK: - SomeDelegate` comment to keep things well organized.
+        
+        **Incorrect**
+        ```swift
+        class MyViewcontroller: UIViewController, UITableViewDataSource, UIScrollViewDelegate {
+            // All methods
+        }
+        ```
+        **Correct**
+        ```swift
+        class MyViewcontroller: UIViewController {
+            ...
+        }
+
+        // MARK: - UITableViewDataSource
+        extension MyViewcontroller: UITableViewDataSource {
+            // Table view data source methods
+        }
+
+        // MARK: - UIScrollViewDelegate
+        extension MyViewcontroller: UIScrollViewDelegate {
+            // Scroll view delegate methods
+        }
+        ```
+            
+- **Delegate Protocols**
+    - If your protocol should have **optional methods**, it must be declared with the `@objc` attribute.
+    - Declare protocol definitions near the class that uses the delegate, not the class that implements the delegate methods.
+    - If more than one class uses the same protocol, declare it in its own file.
+    - Use `weak` optional `var`s for delegate variables to avoid retain cycles.
+    
+        ```swift
+        //SomeTableCell.swift
+        protocol SomeTableCellDelegate: class {
+            func cellButtonWasTapped(cell: SomeTableCell)
+        }
+
+        class SomeTableCell: UITableViewCell {
+            weak var delegate: SomeTableCellDelegate?
+            // ...
+        }
+        ```
+        ```swift
+        //SomeTableViewController.swift
+        class SomeTableViewController: UITableViewController {
+            // ...
+        }
+
+        // MARK: - SomeTableCellDelegate
+        extension SomeTableViewController: SomeTableCellDelegate {
+            func cellButtonWasTapped(cell: SomeTableCell) {
+                // Implementation of cellbuttonwasTapped method
+            }
+        }
+        ```
