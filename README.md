@@ -157,3 +157,44 @@ extension SomeOtherClass: UIViewController {
             ...
             ```
         - If you need to expose functionality to other modules, prefer `public` classes and class members whenever possible to ensure functionality is not accidentally overridden. Better to expose the class to `open` for subclassing when needed.
+
+## 5. Spacing
+- Open curly braces on the same line as the statement and close on a new line.
+- Put `else` statements on the same line as the closing brace of the previous `if` block.
+- Make all colons left-hugging (no space before but a space after) except when used with the ternary operator (a space both before and after).
+        
+    **Incorrect**
+    ```swift
+    class SomeClass : SomeSuperClass
+    {
+        private let someString:String
+
+        func someFunction(someParam :Int)
+        {
+            let dictionaryLiteral : [String : AnyObject] = ["foo" : "bar"]
+
+            let ternary = (someParam > 10) ? "foo": "bar"
+
+            if someParam > 10 { ... }
+
+            else {
+                    ...
+            } } }
+    ```
+    **Correct**
+    ```swift
+    class SomeClass: SomeSuperClass {
+        private let someString: String
+        func someFunction(someParam: Int) {
+            let dictionaryLiteral: [String: AnyObject] = ["foo": "bar"]
+
+            let ternary = (someParam > 10) ? "foo" : "bar"
+
+            if someParam > 10 {
+                ...
+            } else {
+                ...
+            }
+        }
+    }
+    ```
