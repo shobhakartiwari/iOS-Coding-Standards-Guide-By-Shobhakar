@@ -368,3 +368,37 @@ extension SomeOtherClass: UIViewController {
         }
     }
     ```
+## 11. Closures
+- **Trailing Closure Syntax**
+    - Use trailing closure syntax when the only or last argument to a function or method is a closure.
+        
+        ```swift
+        //a function that has a completion closure/block
+        func registerUser(user: User, completion: (Result) -> Void)
+        ```
+        **Incorrect**
+        ```swift
+        UserAPI.registerUser(user, completion: { result in
+            if result.success {
+                ...
+            }
+        })
+        ```
+        **Correct**
+        ```swift
+        UserAPI.registerUser(user) { result in
+            if result.success {
+                ...
+            }
+        }
+        ```
+    - Omit the empty parens () when the only argument is a closure.
+        
+        **Incorrect**
+        ```swift
+        let doubled = [2, 3, 4].map() { $0 * 2 }
+        ```
+        **Correct**
+        ```swift
+        let doubled = [2, 3, 4].map { $0 * 2 }
+        ```
