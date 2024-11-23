@@ -402,3 +402,46 @@ extension SomeOtherClass: UIViewController {
         ```swift
         let doubled = [2, 3, 4].map { $0 * 2 }
         ```
+## 12. Constants
+- Prefer declaring constants outside the scope of a class to give them static storage.
+- When creating a shared constants file (ex. Constants.swift), use `struct`s to group related constants together. The name of the `struct` should be singular, and each field should be written using camelCase.
+- Be wary of large constants files as they can become unmanageable over time. Refactor related parts of the main constants file into separate files for that situation.
+    
+    ```swift
+    struct SegueIdentifier {
+        static let onboarding = "OnboardingSegue"
+        static let login = "LoginSegue"
+        static let logout = "LogoutSegue"
+    }
+
+    struct StoryboardIdentifier {
+        static let main = "Main"
+        static let onboarding = "Onboarding"
+        static let settings = "Settings"
+    }
+
+    print(SegueIdentifier.login) // "LoginSegue"
+    ```
+- Where appropriate, constants can also be grouped using an `enum` with a `rawValue` type that is relevant to the type you need to work with
+    
+    ```swift
+    enum UserJSONKeys: String {
+        case username
+        case email
+        case role
+        // Explicitly defined rawValue
+        case identifier = "id"
+        ...
+    }
+
+    print(UserJSONKeys.username.rawValue) // "username"
+    print(UserJSONKeys.identifier.rawValue) // "id"
+
+    guard let url = URL(string: "http://www.example.com") else {
+        return
+    }
+
+    let mutableURLRequest = NSMutableURLRequest(url: url)
+    mutableURLRequest.HTTPMethod = HTTPMethods.POST.rawValue
+    print(mutableURLRequest.httpMethod) // "POST"
+    ```
