@@ -329,3 +329,42 @@ extension SomeOtherClass: UIViewController {
         ...
     }
     ```
+    - Use `map` when transforming Arrays (`flatMap` for Arrays of Optionals or Arrays of Arrays):
+    ```swift
+    let array = [1, 2, 3, 4, 5]
+    let stringArray = array.map { item in
+        return "item \(item)"
+    }
+
+    let optionalArray: [Int?] = [1, nil, 3, 4, nil]
+    let nonOptionalArray = optionalArray.flatMap { item -> Int? in
+        guard let item = item else {
+            return nil
+        }
+
+        return item * 2
+    }
+
+    let arrayOfArrays = [array, nonOptionalArray]
+    let anotherStringArray = arrayOfArrays.flatmap { item in
+        return "thing \(item)"
+    }
+    ```
+- If you have an Array of Arrays and want to loop over all contents, consider a `for in` loop using `joined(separator:)` instead of nested loops:
+    ```swift
+    let arraysOfNames = [["Moe", "Larry", "Curly"], ["Groucho", "Chico", "Harpo", "Zeppo"]]
+    ```
+    **Recommended**
+    ```swift
+    for name in arraysOfNames.joined() {
+        print("\(name) is an old-timey comedian")
+    }
+    ```
+    **Discouraged**
+    ```swift
+    for names in arraysOfNames {
+        for name in names {
+            print("\(name) is an old-timey comedian")
+        }
+    }
+    ```
