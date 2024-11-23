@@ -257,3 +257,43 @@ extension SomeOtherClass: UIViewController {
             }
         }
         ```
+## 7. Arrays and Dictionaries
+- **Type Shorthand Syntax**
+    Use square bracket shorthand type syntax for Array and Dictionary as recommended by Apple in [Array Type Shorthand Syntax](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-ID107):
+        
+    **Incorrect**
+    ```swift
+    let users: Array<String>
+    let usersByName: Dictionary<String, User>
+    ```
+    **Correct**
+    ```swift
+    let users: [String]
+    let usersByName: [String: User]
+    ```
+- **Trailing Comma**
+    For array and dictionary literals, unless the literal is very short, split it into multiple lines, with the opening symbols on their own line, each item or key-value pair on its own line, and the closing symbol on its own line. Put a trailing comma after the last item or key-value pair to facilitate future insertion/editing. Xcode will handle alignment sanely.
+    
+    **Incorrect**
+    ```swift
+    let anArray = [
+        object1,
+        object2,
+        object3 //no trailing comma
+    ]
+
+    let aDictionary = ["key1": value1, "key2": value2] //how can you even read that?!
+    ```
+    **Correct**
+    ```swift
+    let anArray = [
+        object1,
+        object2,
+        object3,
+    ]
+
+    let aDictionary = [
+        "key1": value1,
+        "key2": value2,
+    ]
+    ```
