@@ -445,3 +445,4 @@ extension SomeOtherClass: UIViewController {
     mutableURLRequest.HTTPMethod = HTTPMethods.POST.rawValue
     print(mutableURLRequest.httpMethod) // "POST"
     ```
+
