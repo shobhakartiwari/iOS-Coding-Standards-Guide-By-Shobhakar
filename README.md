@@ -109,3 +109,51 @@ extension SomeOtherClass: UIViewController {
     }
 }
 ```
+
+### 4. Error Handling:
+- **Forced-try Expression**
+    - **Avoid using the forced-try expression**: `try!`
+        **Incorrect**
+        ```swift
+        // This will crash at runtime if there is an error parsing the JSON data!
+        let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
+        print(json)
+        ```
+        **Correct**
+        ```swift
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            print(json)
+            } catch {
+                print(error)
+            }
+        ```
+    - **Let vs. Var**
+        - Whenever possible use let instead of var.
+        - Declare properties of an **object** or **struct** that shouldn't change over its lifetime with `let`.
+        
+    - **Access Control**
+        - Prefer `private` properties and methods whenever possible to encapsulate and limit access to internal object state.
+        - For `private` declarations at the top level of a file that are outside of a type, explicitly specify the declaration as `fileprivate`. This is functionally the same as marking these declarations private, but clarifies the scope:
+        
+            **Incorrect**
+            ```swift
+            import Foundation
+
+            // Top level declaration
+            private let foo = "bar"
+
+            struct Baz {
+            ...
+            ```
+            **Correct**
+            ```swift
+            import Foundation
+
+            // Top level declaration
+            fileprivate let foo = "bar"
+
+            struct Baz {
+            ...
+            ```
+        - If you need to expose functionality to other modules, prefer `public` classes and class members whenever possible to ensure functionality is not accidentally overridden. Better to expose the class to `open` for subclassing when needed.
