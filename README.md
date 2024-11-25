@@ -457,11 +457,37 @@ var someProperty: Int { return 4 * someOtherProperty }
 
 func helloWorld() -> String { return "Hello, world!" }
 ```
-  **Correct
+**Correct**
 ```swift
 let doubled = [2, 3, 4].map { $0 * 2 }
 
 var someProperty: Int { 4 * someOtherProperty }
 
 func helloWorld() -> String { "Hello, world!" }
+```
+## 14. Closures
+
+- Avoid unnecessary parentheses around closure parameters.
+
+**Incorrect**
+```swift
+functionWithAClosure { (result) in
+    ...
+}
+functionWithAClosure { (result) -> Int in
+    ...
+}
+```
+
+**Correct**
+```swift
+functionWithAClosure { result in
+    ...
+}
+functionWithAClosure { result -> Int in
+    ...
+}
+functionWithAClosure { (result: String) in
+    ...
+}
 ```
