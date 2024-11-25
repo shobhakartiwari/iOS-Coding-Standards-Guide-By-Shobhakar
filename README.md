@@ -480,7 +480,7 @@ functionWithAClosure { (result) -> Int in
 ```
 
 **Correct**
-```swift
+```swift 
 functionWithAClosure { result in
     ...
 }
