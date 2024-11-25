@@ -445,4 +445,23 @@ extension SomeOtherClass: UIViewController {
     mutableURLRequest.HTTPMethod = HTTPMethods.POST.rawValue
     print(mutableURLRequest.httpMethod) // "POST"
     ```
+## 13. Implicit return
 
+- In single-line closures, implicit getters, and other code blocks where the opening {, inner statement, and closing } are all on one line, omit return.
+
+**Incorrect
+```swift
+let doubled = [2, 3, 4].map { return $0 * 2 }
+
+var someProperty: Int { return 4 * someOtherProperty }
+
+func helloWorld() -> String { return "Hello, world!" }
+```
+  **Correct
+```swift
+let doubled = [2, 3, 4].map { $0 * 2 }
+
+var someProperty: Int { 4 * someOtherProperty }
+
+func helloWorld() -> String { "Hello, world!" }
+```
